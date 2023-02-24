@@ -1,3 +1,4 @@
 class Piece:
-    def __init__(self):
-        print("Piece Created")
+    def __init__(self, type):
+        self._type = type
+        print(f"{type} Created")
