@@ -1,0 +1,47 @@
++ check_move_valid(
+    original_square_x,
+    original_square_y,
+    destination_square_x,
+    destination_square_y)
+
+Check to see if the move is valid by the following conditions:
+    - Move is within the piece's movement range
+    - There is a piece belonging to the current player on the original square
+    - Destination square is not 
+    
+Parameters
+    - original_square_x (integer): Moved piece's original x coordinate
+    - original_square_y (integer): Moved piece's original y coordinate
+    - destination_square_x (integer): Destination square x coordinate
+    - destination_square_y (integer): Destination square y coordinate
+
+Return
+    - boolean: If the move is valid
+
++ submit_move(
+    original_square_x,
+    original_square_y,
+    destination_square_x,
+    destination_square_y
+)
+
+Submit Move
+
+Parameters
+    - original_square_x (integer): Moved piece's original x coordinate
+    - original_square_y (integer): Moved piece's original y coordinate
+    - destination_square_x (integer): Destination square x coordinate
+    - destination_square_y (integer): Destination square y coordinate
+
+Return
+    - list (
+        dictionary (integer, integer): x and y coordinates of removed piece
+    ): list of coordinates of removed pieces
+
++ board_update_piece_removed()
+
++ board_update_piece_moved_away()
++ board_update_piece_moved_here()
+
++ end_game()
++ reset_game()

@@ -14,9 +14,9 @@ class Game(object):
 
         # Generate empty board
         self.board = []
-        for x in range(0, 16):
+        for y in range(0, 16):
             column = []
-            for y in range(0, 16):
+            for x in range(0, 16):
                 column.append(Square(None, None))
 
             self.board.append(column)
@@ -25,7 +25,7 @@ class Game(object):
         initial_state = game_data["setup"]
     
     def change_strength(self):
-        pass
+        pass    
 
     def check_move_valid(self):
         pass
