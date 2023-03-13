@@ -11,6 +11,7 @@ class Game(object):
         """ 
         Initialize the initial game conditions
         """
+        super().__init__()
 
         # Generate empty board
         self.board = []

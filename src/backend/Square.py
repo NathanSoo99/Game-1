@@ -10,10 +10,7 @@ class Square(object):
         team_1 = game_data["identifiers"]["team-1"]
         team_2 = game_data["identifiers"]["team-2"]
 
-        self.pieces = {
-            team_1: None,
-            team_2: None,
-        }
+        self.piece = None
 
         self.combat_strength = {
             team_1: 0,

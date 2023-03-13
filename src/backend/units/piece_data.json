@@ -1,3 +1,14 @@
 {
-    "hello": "string"
+    "combat strength": {
+        "infantry": 1,
+        "cavalry": 1,
+        "artillery": 1,
+        "general": 1
+    },
+    "movement range": {
+        "infantry": 1,
+        "cavalry": 1,
+        "artillery": 1,
+        "general": 1
+    }
 }
