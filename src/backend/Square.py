@@ -30,7 +30,7 @@ class Square(object):
 
         return self.pieces["team"]
     
-    def add_piece(self, piece, team):
+    def add_piece(self, piece):
         """
         Add piece if there is not already a piece from the same team
         occupying the square
@@ -39,7 +39,7 @@ class Square(object):
             piece (Piece): piece to be added to square
             team (string): team identifier
         """
-        self.pieces[team] = piece
+        self.piece = piece
 
     def remove_piece(self, team):
         """
@@ -58,3 +58,5 @@ class Square(object):
         """
         self.combat_strength[team] += amount
     
+    def get_combat_strength(self, team):
+        return self.combat_strength[team]

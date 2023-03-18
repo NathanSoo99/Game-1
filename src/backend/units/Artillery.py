@@ -4,5 +4,5 @@ from .PieceData import data
 class Artillery(Piece):
     type = "artillery"
 
-    def __init__(self):
-        super().__init__(self.type)
+    def __init__(self, team):
+        super().__init__(self.type, team)

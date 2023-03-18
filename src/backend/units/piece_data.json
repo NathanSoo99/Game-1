@@ -10,5 +10,11 @@
         "cavalry": 1,
         "artillery": 1,
         "general": 1
+    },
+    "attack range": {
+        "infantry": 1,
+        "cavalry": 1,
+        "artillery": 4,
+        "general": 1
     }
 }
