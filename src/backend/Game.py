@@ -24,6 +24,7 @@ class Game(object):
 
         # Add pieces and calculate combat strength
         initial_state = game_data["setup"]
+        self.board_size = len(game_data["setup"])
 
         y = 0
         for row in initial_state:
@@ -47,29 +48,69 @@ class Game(object):
 
         self.print_combat_strength(game_data["identifiers"]["team-1"])
 
-    def board_update_piece_removed(self):
-        pass
-
-    def board_update_piece_introduced(self, y, x, piece):
+    def board_update_piece_removed(self, y, x, piece):
         if piece is None:
             return
         attack_range = piece.get_attack_range()
         combat_strength = piece.get_combat_strength()
         team = piece.get_team()
-        board_size = len(self.board)
+
+        for dy in range(0, attack_range + 1):
+            for dx in range(0, attack_range + 1):
+                if (dy ** 2 + dx ** 2) <= attack_range **2:
+                    if y+dy < self.board_size:
+                        if x+dx < self.board_size:
+                            removed_piece = self.board[y+dy][x+dx].change_combat_strength(-combat_strength, team)
+                            if removed_piece is not None: self.board_update_remove_piece(y+dy, x+dx, removed_piece)
+                        if x-dx >= 0 and dx != 0:
+                            removed_piece = self.board[y+dy][x-dx].change_combat_strength(-combat_strength, team)
+                            if removed_piece is not None: self.board_update_remove_piece(y+dy, x-dx, removed_piece)
+                    if y-dy >= 0 and dy != 0:
+                        if x+dx < self.board_size:
+                            removed_piece = self.board[y-dy][x+dx].change_combat_strength(-combat_strength, team)
+                            if removed_piece is not None: self.board_update_remove_piece(y-dy, x+dx, removed_piece)
+                        if x-dx >= 0 and dx != 0:
+                            removed_piece = self.board[y-dy][x-dx].change_combat_strength(-combat_strength, team)
+                            if removed_piece is not None: self.board_update_remove_piece(y-dy, x-dx, removed_piece)
+
+         
+
+    def board_update_piece_introduced(self, y, x, piece):
+        """
+        Update the board state after a piece has been added to a square
+
+        Parameters
+            y (int): y coordinate of the square
+            x (int): x coordinate of the square
+            piece (Piece):
+        """
+        # Just in case
+        if piece is None:
+            return
+        
+        # Necessary parameters
+        attack_range = piece.get_attack_range()
+        combat_strength = piece.get_combat_strength()
+        team = piece.get_team()
+
+        # Update all squares in range of piece
         for dy in range(0, attack_range + 1):
             for dx in range(0, attack_range + 1):
                 if (dy ** 2) + (dx ** 2) <= attack_range ** 2:
-                    if y+dy < board_size:
-                        if x+dx < board_size:
-                            self.board[y+dy][x+dx].change_combat_strength(combat_strength, team)
+                    if y+dy < self.board_size:
+                        if x+dx < self.board_size:
+                            removed_piece = self.board[y+dy][x+dx].change_combat_strength(combat_strength, team)
+                            if removed_piece is not None: self.board_update_remove_piece(y+dy, x+dx, removed_piece)
                         if x-dx >= 0 and dx != 0:
-                            self.board[y+dy][x-dx].change_combat_strength(combat_strength, team)
+                            removed_piece = self.board[y+dy][x-dx].change_combat_strength(combat_strength, team)
+                            if removed_piece is not None: self.board_update_remove_piece(y+dy, x-dx, removed_piece)
                     if y-dy >= 0 and dy != 0:
-                        if x+dx < board_size:
-                            self.board[y-dy][x+dx].change_combat_strength(combat_strength, team)
+                        if x+dx < self.board_size:
+                            removed_piece = self.board[y-dy][x+dx].change_combat_strength(combat_strength, team)
+                            if removed_piece is not None: self.board_update_remove_piece(y-dy, x+dx, removed_piece)
                         if x-dx >= 0 and dx != 0:
-                            self.board[y-dy][x-dx].change_combat_strength(combat_strength, team)
+                            removed_piece = self.board[y-dy][x-dx].change_combat_strength(combat_strength, team)
+                            if removed_piece is not None: self.board_update_remove_piece(y-dy, x-dx, removed_piece)
 
 
     def print_combat_strength(self, team):

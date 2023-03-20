@@ -39,9 +39,7 @@ Return
     ): list of coordinates of removed pieces
 
 + board_update_piece_removed()
-
-+ board_update_piece_moved_away()
-+ board_update_piece_moved_here()
++ board_update_piece_introduced()
 
 + end_game()
 + reset_game()
