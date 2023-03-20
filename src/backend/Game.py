@@ -129,10 +129,16 @@ class Game(object):
             - original_y (integer): Moved piece's original y coordinate
             - destination_x (integer): Destination square x coordinate
             - destination_y (integer): Destination square y coordinate
-        
-        Return
         """
-        pass
+        self.check_move_valid(self, original_y, original_x, destination_y, destination_x)
+
+        
+        moving_piece = self.board[original_y][original_x].remove_piece()
+        self.board_update_piece_removed(original_y, original_x, moving_piece)
+        
+        
+        self.board[destination_y][destination_x].add_piece(moving_piece)
+        self.board_update_piece_introduced(destination_y, destination_x, moving_piece)
 
     def check_move_valid(self, original_y, original_x, destination_y, destination_x):
         """
