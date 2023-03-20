@@ -25,6 +25,7 @@ class Game(object):
         # Add pieces and calculate combat strength
         initial_state = game_data["setup"]
         self.board_size = len(game_data["setup"])
+        self.current_player_turn = game_data["identifiers"]["team-1"]
 
         y = 0
         for row in initial_state:
@@ -119,21 +120,44 @@ class Game(object):
                 print(col.get_combat_strength(team), end=" ")
             print()
 
-    def submit_move(self):
+    def submit_move(self, original_y, original_x, destination_y, destination_x):
+        """
+        Submit Move
+
+        Parameters
+            - original_x (integer): Moved piece's original x coordinate
+            - original_y (integer): Moved piece's original y coordinate
+            - destination_x (integer): Destination square x coordinate
+            - destination_y (integer): Destination square y coordinate
+        
+        Return
+        """
         pass
 
-    def check_move_valid(self):
-        pass
+    def check_move_valid(self, original_y, original_x, destination_y, destination_x):
+        """
+        Check to see if the move is valid by the following conditions:
+            - There is a piece belonging to the current player on the original square
+            - Destination square is not already occupied
+            - Move is within the piece's movement range
 
-    def change_strength(self):
-        pass    
+        Parameters
+            - original_x (integer): Moved piece's original x coordinate
+            - original_y (integer): Moved piece's original y coordinate
+            - destination_x (integer): Destination square x coordinate
+            - destination_y (integer): Destination square y coordinate
 
-    def check_move_valid(self):
-        pass
+        Return
+            - boolean: If the move is valid
+        """
+        moving_piece = self.board[original_y][original_x].get_piece()
+        occupying_piece = self.board[destination_y][destination_x].get_piece()
 
-    def get_board(self):
-        return self.board
-    
-    def move(self):
-        pass
+        if moving_piece is None or moving_piece.get_team() != self.current_player_turn: return False
+        if occupying_piece is not None: return False
+
+        movement_range = moving_piece.get_movement_range()
+
+        if (destination_y-original_y) ** 2 + (destination_x-original_x) ** 2 > movement_range ** 2: return False
+        return True
 
