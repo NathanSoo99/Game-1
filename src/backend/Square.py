@@ -17,18 +17,15 @@ class Square(object):
             team_2: 0
         }
 
-    def get_pieces(self, team):
+    def get_piece(self):
         """
-        Get piece on this square from team
-
-        Parameters
-            team (string): team identifier
+        Get piece on this square
         
         Return 
             Piece: requested piece object
         """
 
-        return self.pieces["team"]
+        return self.piece
     
     def add_piece(self, piece):
         """
@@ -41,9 +38,11 @@ class Square(object):
         """
         self.piece = piece
 
-    def remove_piece(self, team):
+    def remove_piece(self):
         """
-        Remove piece belonging to team and return it
+        Remove piece on this square and return it
+
+        Return piece if it exists otherwise None
         """
         temp = self.piece
         self.piece = None

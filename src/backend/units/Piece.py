@@ -18,6 +18,3 @@ class Piece(object):
     
     def get_team(self):
         return self.team
-    
-    def get_team(self):
-        return self.team
